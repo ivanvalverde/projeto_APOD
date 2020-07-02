@@ -9,17 +9,27 @@ request.addEventListener("load",function(){
     let date = document.querySelector("#date");
     let imgTitle = document.querySelector("#imgTitle");
     let credits = document.querySelector("#credits");
+    let imgReceivedAlt = document.querySelector("#pictureAlt");
 
     textApi.textContent += apiObject.explanation;
     textApi.classList.add("textImg");
-    imgReceived.src = apiObject.url;
-    imgReceived.classList.add("video");
     date.textContent = apiObject.date;
     date.classList.add("dateImg");
     credits.textContent += apiObject.copyright;
     credits.classList.add("copyright");
     imgTitle.textContent = apiObject.title;
     imgTitle.classList.add("titleImg");
+
+    if (typeof(imgReceived == "img")){
+        imgReceivedAlt.src = apiObject.url;
+        imgReceived.classList.add("invisible");
+    } else{
+        imgReceived.src = apiObject.url;
+        imgReceivedAlt.classList.add("invisible");
+    }
+
+    imgReceivedAlt.classList.add("image");
+    imgReceived.classList.add("video");
 })
 
 
