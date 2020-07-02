@@ -1,0 +1,39 @@
+body{
+    text-align: center;
+    font-size: 18px;
+}
+
+#titleWebsite{
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 10px;
+}
+
+#about{
+    margin-bottom: 20px;
+}
+
+.dateImg{
+    margin-bottom:10px;
+}
+
+.video{
+    width:50%;
+    height:500px;
+}
+
+.titleImg{
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 10px;
+}
+
+.copyright{
+    margin-bottom:10px;
+}
+
+.textImg{
+    text-align: justify;
+}

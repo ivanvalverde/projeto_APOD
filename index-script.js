@@ -11,10 +11,15 @@ request.addEventListener("load",function(){
     let credits = document.querySelector("#credits");
 
     textApi.textContent += apiObject.explanation;
+    textApi.classList.add("textImg");
     imgReceived.src = apiObject.url;
+    imgReceived.classList.add("video");
     date.textContent = apiObject.date;
+    date.classList.add("dateImg");
     credits.textContent += apiObject.copyright;
+    credits.classList.add("copyright");
     imgTitle.textContent = apiObject.title;
+    imgTitle.classList.add("titleImg");
 })
 
 
