@@ -20,6 +20,23 @@ body{
     margin-right: 15%;
 }
 
+#containerForm{
+    display: flex;
+    justify-content: center;
+}
+
+#textDate{
+    font-size: 18px;
+}
+
+#searchDate{
+    margin-left: 10px;
+}
+
+#submitNewRequest{
+    margin-left: 10px;
+}
+
 .dateImg{
     margin-bottom:10px;
 }
