@@ -9,33 +9,40 @@ request.open("GET", "https://api.nasa.gov/planetary/apod?api_key=pOwBAdf2wrjTLhA
 //Adicionando ao carregamento da página o conteúdo puxado da requisição da API da NASA
 
 request.addEventListener("load",function(){
-    let apiObject = JSON.parse(request.responseText)
-    let imgReceived = document.querySelector("#picture");
-    let textApi = document.querySelector("#textApi");
-    let date = document.querySelector("#date");
-    let imgTitle = document.querySelector("#imgTitle");
-    let credits = document.querySelector("#credits");
-    let imgReceivedAlt = document.querySelector("#pictureAlt");
 
-    textApi.textContent += apiObject.explanation;
-    textApi.classList.add("textImg");
-    date.textContent = apiObject.date;
-    date.classList.add("dateImg");
-    credits.textContent += apiObject.copyright;
-    credits.classList.add("copyright");
-    imgTitle.textContent = apiObject.title;
-    imgTitle.classList.add("titleImg");
+    //Verificando se houve ocorreu tudo bem na requisição, caso contrário, usuário é levado a página de erro
 
-    if (apiObject.media_type == "image"){
-        imgReceivedAlt.src = apiObject.url;
-        imgReceived.classList.add("invisible");
+    if (request.status == 200){
+        let apiObject = JSON.parse(request.responseText)
+        let imgReceived = document.querySelector("#picture");
+        let textApi = document.querySelector("#textApi");
+        let date = document.querySelector("#date");
+        let imgTitle = document.querySelector("#imgTitle");
+        let credits = document.querySelector("#credits");
+        let imgReceivedAlt = document.querySelector("#pictureAlt");
+
+        textApi.textContent += apiObject.explanation;
+        textApi.classList.add("textImg");
+        date.textContent = apiObject.date;
+        date.classList.add("dateImg");
+        credits.textContent += apiObject.copyright;
+        credits.classList.add("copyright");
+        imgTitle.textContent = apiObject.title;
+        imgTitle.classList.add("titleImg");
+
+        if (apiObject.media_type == "image"){
+            imgReceivedAlt.src = apiObject.url;
+            imgReceived.classList.add("invisible");
+        } else{
+            imgReceived.src = apiObject.url;
+            imgReceivedAlt.classList.add("invisible");
+        }
+
+        imgReceivedAlt.classList.add("image");
+        imgReceived.classList.add("video");
     } else{
-        imgReceived.src = apiObject.url;
-        imgReceivedAlt.classList.add("invisible");
+        window.location.href = "error.html";
     }
-
-    imgReceivedAlt.classList.add("image");
-    imgReceived.classList.add("video");
 })
 
 //Adicionando ao botão o evento para nova requisição a partir da data fornecida
@@ -47,47 +54,52 @@ newRequestButton.addEventListener("click", function(){
 
     customizedRequest.open("GET",newApiUrl);
 
+    //Carregando a nova requisição feita
+    
     customizedRequest.addEventListener("load",function(event){
-        let newApiObject = JSON.parse(customizedRequest.responseText);
 
-        //Trecho do código copiado da requisição padrão feita no carregamento da página para alteração do que foi requisitado
+        if (customizedRequest.status == 200){
+            let newApiObject = JSON.parse(customizedRequest.responseText);
 
-        let imgReceived = document.querySelector("#picture");
-        let textApi = document.querySelector("#textApi");
-        let date = document.querySelector("#date");
-        let imgTitle = document.querySelector("#imgTitle");
-        let credits = document.querySelector("#credits");
-        let imgReceivedAlt = document.querySelector("#pictureAlt");
+            //Trecho do código copiado da requisição padrão feita no carregamento da página para alteração do que foi requisitado
 
-        textApi.textContent += newApiObject.explanation;
-        textApi.classList.add("textImg");
-        date.textContent = newApiObject.date;
-        date.classList.add("dateImg");
-        credits.textContent += newApiObject.copyright;
-        credits.classList.add("copyright");
-        imgTitle.textContent = newApiObject.title;
-        imgTitle.classList.add("titleImg");
+            let imgReceived = document.querySelector("#picture");
+            let textApi = document.querySelector("#textApi");
+            let date = document.querySelector("#date");
+            let imgTitle = document.querySelector("#imgTitle");
+            let credits = document.querySelector("#credits");
+            let imgReceivedAlt = document.querySelector("#pictureAlt");
 
-        if (newApiObject.media_type == "image"){
-            imgReceivedAlt.src = newApiObject.url;
-            imgReceived.classList.add("invisible");
-            imgReceivedAlt.classList.remove("invisible");
+            textApi.textContent += newApiObject.explanation;
+            textApi.classList.add("textImg");
+            date.textContent = newApiObject.date;
+            date.classList.add("dateImg");
+            credits.textContent += newApiObject.copyright;
+            credits.classList.add("copyright");
+            imgTitle.textContent = newApiObject.title;
+            imgTitle.classList.add("titleImg");
+
+            if (newApiObject.media_type == "image"){
+                imgReceivedAlt.src = newApiObject.url;
+                imgReceived.classList.add("invisible");
+                imgReceivedAlt.classList.remove("invisible");
+            } else{
+                imgReceived.src = newApiObject.url;
+                imgReceivedAlt.classList.add("invisible");
+                imgReceived.classList.remove("invisible");
+            }
+
+            imgReceivedAlt.classList.add("image");
+            imgReceived.classList.add("video");
+
+            event.preventDefault();
         } else{
-            imgReceived.src = newApiObject.url;
-            imgReceivedAlt.classList.add("invisible");
-            imgReceived.classList.remove("invisible");
+            window.location.href = "error.html";
         }
-
-        imgReceivedAlt.classList.add("image");
-        imgReceived.classList.add("video");
-
-        event.preventDefault();
         
     })
     customizedRequest.send();
 });
-
-
 
 
 request.send();

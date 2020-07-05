@@ -1,0 +1,24 @@
+body{
+    text-align: center;
+    font-size: 18px;
+    background-image: url(universe2.jpg);
+    color: white;
+}
+
+#message{
+    font-size: 60px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+#explanationMessage{
+    font-size: 30px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+#image{
+    height: 30%;
+    width: 30%;
+    cursor: pointer;
+}
